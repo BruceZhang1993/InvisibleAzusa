@@ -26,6 +26,7 @@ Forks from: https://github.com/Lithovox/InvisibleCocogoat
 <a href="https://github.com/BruceZhang1993/InvisibleAzusa"><div id="back" class="navigation">Github</div></a>
 <div id="lost" class="navigation" onclick="giveUp()">Give up?</div>
 <div id="controls" class="navigation">
+	<div id="themes" class="navigation" onclick="loopTheme()">Current Theme: -</div>
 	<div id="easy" class="navigation" onclick="toggleCursor()">Disable Easy Mode</div>
 	<div id="mute" class="navigation" onclick="toggleMute()">Mute</div>
 </div>
@@ -34,7 +35,7 @@ Forks from: https://github.com/Lithovox/InvisibleCocogoat
 	<div id="instructions" class="navigation" onclick="viewInstructions()">Instructions</div>
 </div>
 
-<audio src="themes/azusa_nmmd/source.wav"></audio>
+<audio id="source_audio" src="themes/azusa_nmmd/source.wav"></audio>
 
 <style>
 body {
@@ -54,6 +55,10 @@ body {
 }
 #greeter {
 	width: 200px;
+}
+#themes {
+	float: right;
+	margin: 0px 10px;
 }
 #easy {
 	float: right;
@@ -150,6 +155,11 @@ body {
 	var gainNode;
 	var pannerOptions;
 	var panner;
+
+	var currentTheme = null;
+	let availableThemes = [
+		{id: "azusa_nmmd", name: "捏麻麻滴"}
+	];
 	
 // check WebAudio support
 try {
@@ -334,6 +344,31 @@ function updateNumberOfCocogoatsFound() {
 		document.getElementById("counter").style.visibility = "hidden";
 	}
 }
+
+function loopTheme() {
+	var index = 0;
+	for (const theme in availableThemes) {
+		if (currentTheme === theme.id) {
+			index++;
+			break;
+		}
+		index++;
+	}
+	if (index >= availableThemes.length) {
+		index = 0;
+	}
+	currentTheme = availableThemes[index];
+	document.getElementById("source_audio").setAttribute("src", "themes/" + currentTheme.id + "/source.wav");
+	document.getElementById("greeter").setAttribute("src", "themes/" + currentTheme.id + "/greeter.png");
+	document.getElementById("cocogoat").setAttribute("src", "themes/" + currentTheme.id + "/target.png");
+	document.getElementById("themes").innerText = "Current Theme: " + currentTheme.name;
+}
+
+currentTheme = availableThemes[0];
+document.getElementById("source_audio").setAttribute("src", "themes/" + currentTheme.id + "/source.wav");
+document.getElementById("greeter").setAttribute("src", "themes/" + currentTheme.id + "/greeter.png");
+document.getElementById("cocogoat").setAttribute("src", "themes/" + currentTheme.id + "/target.png");
+document.getElementById("themes").innerText = "Current Theme: " + currentTheme.name;
 
 //check if user has previously found cocogoats, update banner (runs at page start).
 updateNumberOfCocogoatsFound();
