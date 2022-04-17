@@ -157,6 +157,7 @@ body {
 	var panner;
 
 	var currentTheme = null;
+	var currentThemeIndex = -1;
 	let availableThemes = [
 		{id: "azusa_nmmd", name: "捏麻麻滴"},
 		{id: "azusa_nmmd_plus", name: "捏麻麻滴加强版"}
@@ -347,25 +348,19 @@ function updateNumberOfCocogoatsFound() {
 }
 
 function loopTheme() {
-	var index = 0;
-	for (const theme in availableThemes) {
-		if (currentTheme === theme.id) {
-			index+=2;
-			break;
-		}
-		index++;
+	currentThemeIndex++;
+	if (currentThemeIndex >= availableThemes.length) {
+		currentThemeIndex = 0;
 	}
-	if (index >= availableThemes.length) {
-		index = 0;
-	}
-	currentTheme = availableThemes[index];
+	currentTheme = availableThemes[currentThemeIndex];
 	document.getElementById("source_audio").setAttribute("src", "themes/" + currentTheme.id + "/source.wav");
 	document.getElementById("greeter").setAttribute("src", "themes/" + currentTheme.id + "/greeter.png");
 	document.getElementById("cocogoat").setAttribute("src", "themes/" + currentTheme.id + "/target.png");
 	document.getElementById("themes").innerText = "Current Theme: " + currentTheme.name;
 }
 
-currentTheme = availableThemes[0];
+currentThemeIndex = 0;
+currentTheme = availableThemes[currentThemeIndex];
 document.getElementById("source_audio").setAttribute("src", "themes/" + currentTheme.id + "/source.wav");
 document.getElementById("greeter").setAttribute("src", "themes/" + currentTheme.id + "/greeter.png");
 document.getElementById("cocogoat").setAttribute("src", "themes/" + currentTheme.id + "/target.png");
