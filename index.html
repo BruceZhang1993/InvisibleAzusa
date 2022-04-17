@@ -246,7 +246,7 @@ function find() {
 function playHint() {
 	//set volume to a value roughly inversely proportional to the distance between the cursor and cocogoat, but never below -20dB.
 	if (!audioMuted) {
-		gainNode.gain.value = Math.min(Math.max((1 / (1+0.01*calculateDistance(document.getElementById("cocogoat"), mouseX, mouseY))), 0.1), 1);
+		gainNode.gain.value = Math.min(Math.max((1 / (1+0.02*calculateDistance(document.getElementById("cocogoat"), mouseX, mouseY))), 0.1), 1);
 	}
 	//set stereo pan based on whether cocogoat is left or right of the cursor position, scaled by width of window
 	//use square root to make pan effect more significant near the target. Requires workaround to return proper negative values.
@@ -333,11 +333,11 @@ function updateNumberOfCocogoatsFound() {
 		//check if localstorage exists, and check if there is a number stored
 		if (!isNaN(localStorage.getItem("cocogoatCount")) && (localStorage.getItem("cocogoatCount"))) {
 			//if number is stored, set counter to match.
-			document.getElementById("counter").textContent = ("Cocogoats found: " + Number(localStorage.getItem("cocogoatCount")));
+			document.getElementById("counter").textContent = ("Azusa found: " + Number(localStorage.getItem("cocogoatCount")));
 		} else {
 			//if no number is stored, set counter to 0
 			localStorage.setItem("cocogoatCount", 0);
-			document.getElementById("counter").textContent = ("Cocogoats found: 0");
+			document.getElementById("counter").textContent = ("Azusa found: 0");
 		}
 	} else {
 		//the user doesn't need to know about the useless number they're missing out on. Hide the cocogoat counter.
