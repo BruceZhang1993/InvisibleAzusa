@@ -3,48 +3,38 @@
 <meta charset="utf-8">
 <!--
 Inspired by: https://findtheinvisiblecow.com/
-
-Unlike invisible cow which plays different sound files based on cursor distance from the cow,
-this game plays a single file with varying volume and L-R pan depending on position relative to the cocogoat.
-
-The image of Ganyu is covered by a blank div "cover" because:
-- click events on hidden elements don't work
-- opacity 0 images can be interacted with in unexpected ways.
-
-In other words, an additional element z-indexed on top of the image was required. 
-Or I could have simply made the image not even exist and only added the content when the mouse was clicked at certain coordinates,
-but this way is easier to debug. I'm not terribly concerned about people using debug tools to cheat, given there's an instant win button.
+Forks from: https://github.com/Lithovox/InvisibleCocogoat
 -->
 <head>
 
-<title>Invisible Cocogoat</title>
-<link rel="shortcut icon" type="image/png" href="coconut.png"/>
+<title>Invisible Azusa</title>
+<link rel="shortcut icon" type="image/png" href="azusa_mask.png"/>
 </head>
 
 <div id="space" class="hider">	
-	<img src="ganyu-small.png" id="cocogoat" class="hider"/>
+	<img src="themes/azusa_nmmd/target.png" id="cocogoat" class="hider"/>
 	<div id="cover" onclick="find()" class="hider"></div>	
 	<div id="promptButton" onclick="startPlaying()">
-	Hunt a Cocogoat. Please and Thank You.
+	Hunt Azusa. Please and Thank You.
 	<br><br>
-	<img src="qiqi.png"/>
+	<img id="greeter" src="themes/azusa_nmmd/greeter.png"/>
 	<br><br>
 	Use headphones and follow the audio cues.
 	</div>
 </div>
 
-<a href="https://github.com/Lithovox/InvisibleCocogoat"><div id="back" class="navigation">Github</div></a>
+<a href="https://github.com/BruceZhang1993/InvisibleAzusa"><div id="back" class="navigation">Github</div></a>
 <div id="lost" class="navigation" onclick="giveUp()">Give up?</div>
 <div id="controls" class="navigation">
 	<div id="easy" class="navigation" onclick="toggleCursor()">Disable Easy Mode</div>
 	<div id="mute" class="navigation" onclick="toggleMute()">Mute</div>
 </div>
 <div id="info" class="navigation">
-	<div id="counter" class="navigation">Cocogoats found: 0</div>
+	<div id="counter" class="navigation">Azusa found: 0</div>
 	<div id="instructions" class="navigation" onclick="viewInstructions()">Instructions</div>
 </div>
 
-<audio src="qiqi.wav"></audio>
+<audio src="themes/azusa_nmmd/source.wav"></audio>
 
 <style>
 body {
@@ -61,6 +51,9 @@ body {
 }
 .navigation:hover {
 	border: 3px solid MediumBlue;
+}
+#greeter {
+	width: 200px;
 }
 #easy {
 	float: right;
